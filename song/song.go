@@ -3,9 +3,9 @@ package song
 import "github.com/gophergala2016/chopher/note"
 
 const (
-	Slow   Tempo = 2
-	Medium Tempo = 1
-	Fast   Tempo = 0.5
+	Fast   Tempo = 1.2
+	Medium Tempo = 0.8
+	Slow   Tempo = 0.5
 )
 
 // Tempo is the duration of the Full note in seconds
@@ -45,4 +45,12 @@ func (s *Song) AddAfter(note note.Note, duration note.Duration) *Song {
 	}
 	s.add(note, duration, lastNote.Start+float64(lastNote.Duration))
 	return s
+}
+
+func (s *SongNote) IsValid(time float64) bool {
+	// log.Println(s.Note, time, s.Start, s.Start+float64(s.Duration))
+	if time < s.Start {
+		return false
+	}
+	return time < (s.Start + float64(s.Duration))
 }
