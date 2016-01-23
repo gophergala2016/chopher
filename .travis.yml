@@ -1,0 +1,8 @@
+language: go
+go:
+  - 1.5.2
+install:
+  - go get github.com/tools/godep
+  - go get github.com/smartystreets/goconvey
+script:
+  - go test -cover -race ./...
