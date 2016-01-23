@@ -6,9 +6,15 @@ import (
 )
 
 const (
-	a4Frequency float64 = 440.0
-	magic       float64 = 1.0594630943592952645618252949463417007792043174941856
+	a4Frequency float64  = 440.0
+	magic       float64  = 1.0594630943592952645618252949463417007792043174941856
+	Full        Duration = 1
+	Half        Duration = 0.5
+	Quarter     Duration = 0.25
 )
+
+// Duration value
+type Duration float64
 
 // Musical scale halfstep values
 const (

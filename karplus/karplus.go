@@ -8,7 +8,7 @@ import (
 )
 
 // Sound plays a sound generated with the Karplus-Strong algorithm
-func Sound(frequency float64, damping float64, samplesPerSecond, volume, duration int) []byte {
+func Sound(frequency float64, damping float64, samplesPerSecond, volume int, duration float64) []byte {
 	buf := make([]float64, int(
 		math.Ceil(
 			float64(samplesPerSecond)/frequency,
@@ -22,7 +22,7 @@ func Sound(frequency float64, damping float64, samplesPerSecond, volume, duratio
 
 	ret := make([]byte, 0, len(buf)*2)
 	j := 0
-	for i := 0; i < samplesPerSecond*duration; i++ {
+	for i := 0; i < int(float64(samplesPerSecond)*duration); i++ {
 		var temp2 bytes.Buffer
 		sampleValue := int16(buf[j] * 32767)
 		binary.Write(&temp2, binary.LittleEndian, sampleValue)

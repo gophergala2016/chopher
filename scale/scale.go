@@ -23,7 +23,7 @@ type Scale struct {
 }
 
 // Scale turn a pattern to a scale using a key note
-func (p Pattern) Scale(key note.Note) Scale {
+func (p Pattern) New(key note.Note) Scale {
 	n := make([]note.Note, len(p)+1)
 	n[0] = key
 	for i, v := range p {

@@ -4,18 +4,30 @@ import (
 	"io"
 	"os"
 
-	"github.com/Aorioli/chopher/karplus.go"
+	"github.com/Aorioli/chopher/karplus"
 	"github.com/Aorioli/chopher/note"
-	"github.com/Aorioli/chopher/scale"
+	"github.com/Aorioli/chopher/song"
 	"github.com/Aorioli/chopher/wave"
 )
 
 func main() {
 	f, _ := os.Create("chopher.wav")
 	w := wave.New(wave.Stereo, 44100)
-	s := scale.Major.Scale(note.Note{Note: note.C, Octave: 2})
+	s := song.New(song.Medium)
+	s.AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.FIS, Octave: 2}, note.Quarter).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
+		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half)
 	for _, n := range s.Notes {
-		w.Write(karplus.Sound(n.Frequency(), 1, 44100, 1000, 1))
+		w.Write(karplus.Sound(n.Note.Frequency(), 0.996, 44100, 1000, float64(n.Duration)*2.0))
 	}
 	io.Copy(f, w.Reader())
 	f.Close()
