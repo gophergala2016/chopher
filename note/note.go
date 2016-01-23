@@ -1,12 +1,17 @@
 package note
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
 
 const (
 	a4Frequency float64 = 440.0
 	magic       float64 = 1.0594630943592952645618252949463417007792043174941856
+)
 
-	// Musical scale halfstep values
+// Musical scale halfstep values
+const (
 	C = iota
 	CIS
 	D
@@ -51,4 +56,14 @@ func (n Note) Frequency() float64 {
 
 func halfStepDistance(from, to Note) int {
 	return (to.Octave-from.Octave)*12 + (to.Note - from.Note)
+}
+
+var notes = [...]string{
+	"C", "C#", "D", "D#",
+	"E", "F", "F#", "G",
+	"G#", "A", "A#", "B",
+}
+
+func (n Note) String() string {
+	return fmt.Sprintf("%s%d", notes[n.Note], n.Octave)
 }

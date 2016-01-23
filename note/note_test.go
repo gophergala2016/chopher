@@ -30,3 +30,10 @@ func TestFrequency(t *testing.T) {
 		convey.So(actual, convey.ShouldAlmostEqual, 523.251, 0.001)
 	})
 }
+
+func TestString(t *testing.T) {
+	convey.Convey("Given value", t, func() {
+		expected := "C5"
+		convey.So(Note{Note: C, Octave: 5}.String(), convey.ShouldEqual, expected)
+	})
+}
