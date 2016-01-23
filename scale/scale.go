@@ -3,7 +3,7 @@ package scale
 import (
 	"strings"
 
-	"github.com/Aorioli/chopher/note"
+	"github.com/gophergala2016/chopher/note"
 )
 
 // Pattern is an array of halfstep jumps

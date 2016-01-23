@@ -3,7 +3,7 @@ package scale
 import (
 	"testing"
 
-	"github.com/Aorioli/chopher/note"
+	"github.com/gophergala2016/chopher/note"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

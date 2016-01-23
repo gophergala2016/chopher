@@ -1,6 +1,6 @@
 package song
 
-import "github.com/Aorioli/chopher/note"
+import "github.com/gophergala2016/chopher/note"
 
 const (
 	Slow   Tempo = 2

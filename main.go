@@ -4,10 +4,10 @@ import (
 	"io"
 	"os"
 
-	"github.com/Aorioli/chopher/karplus"
-	"github.com/Aorioli/chopher/note"
-	"github.com/Aorioli/chopher/song"
-	"github.com/Aorioli/chopher/wave"
+	"github.com/gophergala2016/chopher/karplus"
+	"github.com/gophergala2016/chopher/note"
+	"github.com/gophergala2016/chopher/song"
+	"github.com/gophergala2016/chopher/wave"
 )
 
 func main() {
