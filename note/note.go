@@ -1,7 +1,6 @@
 package note
 
 import (
-	"encoding/binary"
 	"fmt"
 	"math"
 )
@@ -63,23 +62,6 @@ var notes = [...]string{
 	"C", "C#", "D", "D#",
 	"E", "F", "F#", "G",
 	"G#", "A", "A#", "B",
-}
-
-// Sound plays the note into a byte slice
-func (n Note) Sound(samplesPerSecond, duration, volume int) []byte {
-	numberOfSamples := samplesPerSecond * duration
-	phase := 0.0
-
-	var frequencyRadiansPerSample = n.Frequency() * 2 * math.Pi / float64(samplesPerSecond)
-	ret := make([]byte, 0, numberOfSamples*2)
-	buf := make([]byte, 2, 2)
-	for sample := 0; sample < numberOfSamples; sample++ {
-		phase += frequencyRadiansPerSample
-		sampleValue := float64(volume) * math.Sin(phase)
-		binary.LittleEndian.PutUint16(buf, uint16(sampleValue))
-		ret = append(ret, buf...)
-	}
-	return ret
 }
 
 func (n Note) String() string {
