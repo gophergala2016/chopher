@@ -1,3 +1,3 @@
 # Chopher (Chopin + Gopher)
 
-Chopher is for fun experimental project that hashes files as music.
+Chopher is a for fun experimental project that hashes files as music.
