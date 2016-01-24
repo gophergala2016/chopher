@@ -47,6 +47,15 @@ func (s *Song) AddAfter(note note.Note, duration note.Duration) *Song {
 	return s
 }
 
+func (s *Song) AddWith(note note.Note, duration note.Duration) *Song {
+	lastNote := SongNote{}
+	if len(s.Notes) > 0 {
+		lastNote = s.Notes[len(s.Notes)-1]
+	}
+	s.add(note, duration, lastNote.Start)
+	return s
+}
+
 func (s *SongNote) IsValid(time float64) bool {
 	// log.Println(s.Note, time, s.Start, s.Start+float64(s.Duration))
 	if time < s.Start {

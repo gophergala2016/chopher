@@ -63,7 +63,7 @@ func NewNote(n song.SongNote, samplingRate int) *Note {
 func (n *Note) Sound() float64 {
 	sampleValue := n.Buffer[0]
 
-	v := (n.Buffer[0] + n.Buffer[1]) * 0.5 * 0.99996
+	v := (n.Buffer[0] + n.Buffer[1]) * 0.5 * 0.998
 	n.Buffer = append(n.Buffer[1:], v)
 
 	return sampleValue
@@ -108,13 +108,12 @@ func (s *Song) Sound() []byte {
 		for i := lastNote + 1; i < len(s.Song.Notes); i++ {
 			n := s.Song.Notes[i]
 			if n.IsValid(time) {
-				temp = append(s.CurrentNotes, NewNote(n, s.SamplingRate))
+				temp = append(temp, NewNote(n, s.SamplingRate))
 				lastNote = i
 			}
 		}
 
 		s.CurrentNotes = temp
-
 		orderBuffer = bytes.Buffer{}
 		sampleValue := int16(sample * 32767)
 		binary.Write(&orderBuffer, binary.LittleEndian, sampleValue)
