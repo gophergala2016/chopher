@@ -13,13 +13,18 @@ import (
 )
 
 func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
+	if r.ContentLength > 2*1024*1024 {
+		http.Error(w, "Request too large, I'm too tired to be smart right now", http.StatusExpectationFailed)
+		return
+	}
+
 	file, header, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
 	}
 
-	reader := io.LimitReader(file, 1024*1024)
+	reader := io.LimitReader(file, 2*1024*1024)
 	wav := wave.New(wave.Stereo, 22000)
 	h := hasher.New(reader)
 	sng := h.Hash()

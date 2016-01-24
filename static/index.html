@@ -34,7 +34,8 @@
           Did you ever wander what your source code sounded like? Or what songs any files on your computer could be hiding? Wander no more, because Chopher is here to compose those songs for you.
         </p>
         <p>
-          Just select a file, push that submit button, and your file gets uploaded, processed in memory and you receive your very own song!
+
+          Just select a <strong>file smaller then 2MB but larger then 17B</strong>(why, because I'm too tired to implement proper error messages at this point), push that submit button, and your file gets uploaded, processed in memory and you receive your very own song!
         </p>
       </div>
     </div>
@@ -78,10 +79,7 @@
 
         if (input.length) {
           input.val(log);
-        } else {
-          if (log) alert(log);
         }
-
       });
     });
   </script>
