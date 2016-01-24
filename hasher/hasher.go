@@ -12,6 +12,7 @@ var (
 	scaleMap = map[int]scale.Pattern{
 		0: scale.Major,
 		1: scale.Minor,
+		2: scale.Blues,
 	}
 
 	durationMap = map[int]note.Duration{
@@ -31,8 +32,7 @@ func New(r io.Reader) Hasher {
 	r.Read(buf)
 
 	speed := song.Slow + song.Tempo(float64(buf[0])/256)
-	scl := scaleMap[int(buf[1])%2]
-
+	scl := scaleMap[int(buf[1])%3]
 	var sum int
 	for i := 1; i < len(buf); i++ {
 		sum += int(buf[i])

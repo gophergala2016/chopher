@@ -27,6 +27,7 @@ var (
 		Chords: []Chord{
 			Chord{0, 4, 7, 11}, // seventh
 			Chord{0, 4, 7},     // major
+			Chord{0, 3, 7},     // minor
 			Chord{0, 7},        // power
 		},
 	}
@@ -37,7 +38,19 @@ var (
 		Chords: []Chord{
 			Chord{0, 3, 7, 10}, // seventh
 			Chord{0, 3, 7},     // minor
+			Chord{0, 4, 7},     // major
 			Chord{0, 3, 6},     // diminished
+		},
+	}
+	//Blues scale pattern
+	Blues = Pattern{
+		Name:  "Blues",
+		Scale: []int{3, 2, 1, 1, 3, 2},
+		Chords: []Chord{
+			Chord{0, 4, 7, 10}, //dominant
+			Chord{0, 3, 7},     // minor
+			Chord{0, 3, 6},     // diminished
+			Chord{0, 4, 7},     // major
 		},
 	}
 )
