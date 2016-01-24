@@ -37,7 +37,7 @@ func New(r io.Reader) Hasher {
 	for i := 1; i < len(buf); i++ {
 		sum += int(buf[i])
 	}
-	nt := note.Note{Note: note.C, Octave: 0}.AddHalfSteps(sum % 48)
+	nt := note.Note{Note: note.C, Octave: 1}.AddHalfSteps(sum % 36)
 	s := song.New(speed)
 	s.Scale = scl.New(nt)
 
