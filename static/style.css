@@ -29,3 +29,7 @@ h1 {
   background-repeat: no-repeat;
   min-height: 200px;
 }
+
+.row {
+  margin-bottom: 10px;
+}
