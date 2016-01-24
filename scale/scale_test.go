@@ -22,7 +22,7 @@ func TestPatternNew(t *testing.T) {
 					note.Note{Note: note.B, Octave: 4},
 					note.Note{Note: note.C, Octave: 5},
 				},
-				pattern: Major,
+				Chords: Major.Chords,
 			}
 			So(actual, ShouldResemble, expected)
 		})

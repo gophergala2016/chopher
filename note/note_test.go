@@ -19,7 +19,7 @@ func TestHalfStepDistance(t *testing.T) {
 	convey.Convey("Given value", t, func() {
 		expected := 3
 
-		convey.So(halfStepDistance(a4, Note{Note: C, Octave: 5}), convey.ShouldEqual, expected)
+		convey.So(HalfstepDistance(a4, Note{Note: C, Octave: 5}), convey.ShouldEqual, expected)
 	})
 }
 

@@ -64,10 +64,10 @@ func (n Note) Frequency() float64 {
 	if n.Note == Rest {
 		return 1.0
 	}
-	return a4Frequency * math.Pow(magic, float64(halfStepDistance(a4, n)))
+	return a4Frequency * math.Pow(magic, float64(HalfstepDistance(a4, n)))
 }
 
-func halfStepDistance(from, to Note) int {
+func HalfstepDistance(from, to Note) int {
 	return (to.Octave-from.Octave)*12 + (to.Note - from.Note)
 }
 
