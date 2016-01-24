@@ -18,26 +18,27 @@ func main() {
 		AddWith(note.Note{Note: note.C, Octave: 2}.AddHalfSteps(5), note.Half).
 		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.DIS, Octave: 2}.AddHalfSteps(5), note.Half).
-		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
-		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Half).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Full).
+		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Full).
 		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.C, Octave: 2}.AddHalfSteps(5), note.Half).
 		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.DIS, Octave: 2}.AddHalfSteps(5), note.Half).
 		AddAfter(note.Note{Note: note.FIS, Octave: 2}, note.Quarter).
 		AddWith(note.Note{Note: note.FIS, Octave: 2}.AddHalfSteps(5), note.Quarter).
-		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
-		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Half).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Full).
+		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Full).
 		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.C, Octave: 2}.AddHalfSteps(5), note.Half).
 		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.DIS, Octave: 2}.AddHalfSteps(5), note.Half).
-		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Half).
-		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Half).
+		AddAfter(note.Note{Note: note.F, Octave: 2}, note.Full).
+		AddWith(note.Note{Note: note.F, Octave: 2}.AddHalfSteps(5), note.Full).
+		AddWith(note.Note{Note: note.Rest}, note.Full).
 		AddAfter(note.Note{Note: note.DIS, Octave: 2}, note.Half).
 		AddWith(note.Note{Note: note.DIS, Octave: 2}.AddHalfSteps(5), note.Half).
-		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Half).
-		AddWith(note.Note{Note: note.C, Octave: 2}.AddHalfSteps(5), note.Half)
+		AddAfter(note.Note{Note: note.C, Octave: 2}, note.Full).
+		AddWith(note.Note{Note: note.C, Octave: 2}.AddHalfSteps(5), note.Full)
 
 	ks := karplus.Song{
 		Song:         s,

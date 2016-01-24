@@ -6,6 +6,7 @@ import (
 	"math"
 	"math/rand"
 
+	"github.com/gophergala2016/chopher/note"
 	"github.com/gophergala2016/chopher/song"
 )
 
@@ -61,6 +62,9 @@ func NewNote(n song.SongNote, samplingRate int) *Note {
 
 // Sound pops the current buffer value and appends the new one
 func (n *Note) Sound() float64 {
+	if n.Note.Note.Note == note.Rest {
+		return 0
+	}
 	sampleValue := n.Buffer[0]
 
 	v := (n.Buffer[0] + n.Buffer[1]) * 0.5 * 0.998

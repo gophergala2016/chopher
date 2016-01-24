@@ -32,6 +32,10 @@ const (
 	B
 )
 
+const (
+	Rest = 13
+)
+
 var (
 	a4 = Note{
 		Note:   A,
@@ -57,6 +61,9 @@ func (n Note) AddHalfSteps(hs int) Note {
 //
 // https://en.wikipedia.org/wiki/Piano_key_frequencies
 func (n Note) Frequency() float64 {
+	if n.Note == Rest {
+		return 1.0
+	}
 	return a4Frequency * math.Pow(magic, float64(halfStepDistance(a4, n)))
 }
 
