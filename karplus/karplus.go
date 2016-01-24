@@ -1,42 +1,13 @@
 package karplus
 
 import (
-	"bytes"
-	"encoding/binary"
+	"io"
 	"math"
 	"math/rand"
 
 	"github.com/gophergala2016/chopher/note"
 	"github.com/gophergala2016/chopher/song"
 )
-
-// Sound plays a sound generated with the Karplus-Strong algorithm
-func Sound(frequency float64, damping float64, samplesPerSecond, volume int, duration float64) []byte {
-	buf := make([]float64, int(
-		math.Ceil(
-			float64(samplesPerSecond)/frequency,
-		),
-	))
-	r := rand.New(rand.NewSource(1))
-
-	for i := 0; i < len(buf); i++ {
-		buf[i] = r.Float64() - 0.5
-	}
-
-	ret := make([]byte, 0, len(buf)*2)
-	j := 0
-	for i := 0; i < int(float64(samplesPerSecond)*duration); i++ {
-		var temp2 bytes.Buffer
-		sampleValue := int16(buf[j] * 32767)
-		binary.Write(&temp2, binary.LittleEndian, sampleValue)
-		ret = append(ret, temp2.Bytes()...)
-
-		nextJ := (j + 1) % len(buf)
-		buf[j] = (buf[j] + buf[nextJ]) * 0.5 * damping
-		j = nextJ
-	}
-	return ret
-}
 
 type Note struct {
 	Note   song.SongNote
@@ -67,7 +38,7 @@ func (n *Note) Sound() float64 {
 	}
 	sampleValue := n.Buffer[0]
 
-	v := (n.Buffer[0] + n.Buffer[1]) * 0.5 * 0.998
+	v := (n.Buffer[0] + n.Buffer[1]) * 0.5 * 0.9999
 	n.Buffer = append(n.Buffer[1:], v)
 
 	return sampleValue
@@ -79,7 +50,7 @@ type Song struct {
 	CurrentNotes []*Note
 }
 
-func (s *Song) Sound() []byte {
+func (s *Song) Sound(w io.Writer) {
 	var lastNote int
 	for i, n := range s.Song.Notes {
 		if n.IsValid(0) {
@@ -93,21 +64,20 @@ func (s *Song) Sound() []byte {
 		increment = float64(s.Song.Tempo) / float64(s.SamplingRate)
 	)
 
-	ret := make([]byte, 0, len(s.Song.Notes)*s.SamplingRate)
-	var orderBuffer bytes.Buffer
+	temp := make([]*Note, 0, len(s.Song.Notes)/10+1)
 	for len(s.CurrentNotes) > 0 {
 		var sample float64
+		temp = make([]*Note, 0, len(s.Song.Notes)/10+1)
 		for _, n := range s.CurrentNotes {
 			sample += n.Sound()
-		}
-
-		time += increment
-		temp := make([]*Note, 0, len(s.CurrentNotes))
-		for _, n := range s.CurrentNotes {
 			if n.Note.IsValid(time) {
 				temp = append(temp, n)
 			}
 		}
+
+		sampleValue := int16(sample * 32767)
+		w.Write([]byte{byte(sampleValue), byte(sampleValue >> 8)})
+		time += increment
 
 		for i := lastNote + 1; i < len(s.Song.Notes); i++ {
 			n := s.Song.Notes[i]
@@ -118,10 +88,10 @@ func (s *Song) Sound() []byte {
 		}
 
 		s.CurrentNotes = temp
-		orderBuffer = bytes.Buffer{}
-		sampleValue := int16(sample * 32767)
-		binary.Write(&orderBuffer, binary.LittleEndian, sampleValue)
-		ret = append(ret, orderBuffer.Bytes()...)
+
 	}
-	return ret
 }
+
+// func writeLittleEndian(w io.Writer, value int16) {
+// 	w.Write(p []byte)
+// }

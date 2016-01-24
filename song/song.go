@@ -8,7 +8,7 @@ import (
 const (
 	Fast   Tempo = 1.2
 	Medium Tempo = 0.8
-	Slow   Tempo = 0.5
+	Slow   Tempo = 0.4
 )
 
 // Tempo is the duration of the Full note in seconds

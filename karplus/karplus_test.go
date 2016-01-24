@@ -7,11 +7,10 @@ import (
 	"github.com/gophergala2016/chopher/song"
 )
 
-func BenchmarkSound(b *testing.B) {
-	b.ReportAllocs()
-	for i := 0; i < b.N; i++ {
-		Sound(440, 0.996, 44200, 1, 60)
-	}
+type FakeWriter struct{}
+
+func (f FakeWriter) Write(p []byte) (int, error) {
+	return len(p), nil
 }
 
 func BenchmarkSong(b *testing.B) {
@@ -24,6 +23,6 @@ func BenchmarkSong(b *testing.B) {
 	b.ResetTimer()
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		ks.Sound()
+		ks.Sound(FakeWriter{})
 	}
 }

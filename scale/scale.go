@@ -32,6 +32,7 @@ var (
 	}
 	// Minor scale pattern
 	Minor = Pattern{
+		Name:  "Minor",
 		Scale: []int{2, 1, 2, 2, 1, 2, 2},
 		Chords: []Chord{
 			Chord{0, 3, 7, 10}, // seventh
