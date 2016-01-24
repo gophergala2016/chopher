@@ -20,9 +20,10 @@ func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 	file, header, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, err.Error(), 400)
+		return
 	}
 
-	reader := io.LimitReader(file, 5*1024*1024)
+	reader := io.LimitReader(file, 1024*1024)
 	wav := wave.New(wave.Stereo, 44000)
 	h := hasher.New(reader)
 	sng := h.Hash()
@@ -41,5 +42,4 @@ func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Add("Content-Disposition", "filename="+filename)
 	io.Copy(w, wav.Reader())
-
 }
