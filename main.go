@@ -18,7 +18,7 @@ func main() {
 
 	r := mux.NewRouter()
 	r.StrictSlash(true)
-	r.HandleFunc("/", api.Index).Methods("GET")
-	r.HandleFunc("/upload", api.FileUploadHandler)
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/"))).Methods("GET")
+	r.HandleFunc("/upload", api.FileUploadHandler).Methods("POST")
 	http.ListenAndServe(":"+port, handlers.LoggingHandler(os.Stdout, r))
 }

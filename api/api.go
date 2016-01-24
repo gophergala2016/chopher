@@ -12,10 +12,6 @@ import (
 	"github.com/gophergala2016/chopher/wave"
 )
 
-func Index(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
-}
-
 func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 	file, header, err := r.FormFile("file")
 	if err != nil {
