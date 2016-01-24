@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/gophergala2016/chopher/api.go"
+	"github.com/gophergala2016/chopher/api"
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )

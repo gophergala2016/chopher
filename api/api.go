@@ -24,14 +24,14 @@ func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	reader := io.LimitReader(file, 1024*1024)
-	wav := wave.New(wave.Stereo, 44000)
+	wav := wave.New(wave.Stereo, 22000)
 	h := hasher.New(reader)
 	sng := h.Hash()
 	file.Close()
 
 	ks := karplus.Song{
 		Song:         *sng,
-		SamplingRate: 44000,
+		SamplingRate: 22000,
 	}
 	ks.Sound(&wav)
 
@@ -40,6 +40,6 @@ func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 	filename := url.QueryEscape(
 		strings.TrimSuffix(header.Filename, filepath.Ext(header.Filename)) + ".wav")
 
-	w.Header().Add("Content-Disposition", "filename="+filename)
+	w.Header().Add("Content-Disposition", "attachment; filename="+filename)
 	io.Copy(w, wav.Reader())
 }
