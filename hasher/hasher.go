@@ -54,7 +54,9 @@ func (h *Hasher) Hash() *song.Song {
 		h.Song.Notes = h.Song.Notes[:200]
 	}
 	songLength = len(h.Song.Notes)
-	h.Song.Notes[songLength-1].Duration = note.Full + 1.0
+	if songLength > 1 {
+		h.Song.Notes[songLength-1].Duration = note.Full + 1.0
+	}
 	return h.Song
 }
 func (h *Hasher) Write(p []byte) (int, error) {

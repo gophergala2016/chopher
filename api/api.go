@@ -29,6 +29,11 @@ func FileUploadHandler(w http.ResponseWriter, r *http.Request) {
 	sng := h.Hash()
 	file.Close()
 
+	if len(sng.Notes) == 0 {
+		http.Error(w, "The file is too small, at least 17 bytes are required, and yes I'm that lazy!", 400)
+		return
+	}
+
 	ks := karplus.Song{
 		Song:         *sng,
 		SamplingRate: 22000,
