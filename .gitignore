@@ -64,3 +64,4 @@ dep.png
 
 # Test files
 *.wav
+!main.wav
