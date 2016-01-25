@@ -53,6 +53,18 @@ var (
 			Chord{0, 4, 7},     // major
 		},
 	}
+	//Bebop scale pattern
+	Bebop = Pattern{
+		Name:  "Bebop",
+		Scale: []int{1, 1, 1, 2, 2, 1, 2},
+		Chords: []Chord{
+			Chord{0, 3, 7, 10}, // seventh
+			Chord{0, 4, 7, 10}, //dominant
+			Chord{0, 3, 7},     // minor
+			Chord{0, 3, 6},     // diminished
+			Chord{0, 4, 7},     // major
+		},
+	}
 )
 
 // Scale is defined by the notes and the pattern they form
@@ -62,12 +74,16 @@ type Scale struct {
 }
 
 // Scale turn a pattern to a scale using a key note
-func (p Pattern) New(key note.Note) Scale {
+func (p Pattern) New(key note.Note, reverse bool) Scale {
 	n := make([]note.Note, len(p.Scale)+1)
 	n[0] = key
 	for i, v := range p.Scale {
+		if reverse {
+			v = -v
+		}
 		n[i+1] = n[i].AddHalfSteps(v)
 	}
+
 	return Scale{
 		Notes:  n,
 		Chords: p.Chords,

@@ -9,13 +9,14 @@ import (
 )
 
 var (
-	scaleMap = map[int]scale.Pattern{
+	scaleMap = [...]scale.Pattern{
 		0: scale.Major,
 		1: scale.Minor,
 		2: scale.Blues,
+		3: scale.Bebop,
 	}
 
-	durationMap = map[int]note.Duration{
+	durationMap = [...]note.Duration{
 		0: note.Quarter,
 		1: note.Half,
 		2: note.Full,
@@ -32,14 +33,14 @@ func New(r io.Reader) Hasher {
 	r.Read(buf)
 
 	speed := song.Slow + song.Tempo(float64(buf[0])/256)
-	scl := scaleMap[int(buf[1])%3]
+	scl := scaleMap[int(buf[1])%4]
 	var sum int
 	for i := 1; i < len(buf); i++ {
 		sum += int(buf[i])
 	}
 	nt := note.Note{Note: note.C, Octave: 1}.AddHalfSteps(sum % 36)
 	s := song.New(speed)
-	s.Scale = scl.New(nt)
+	s.Scale = scl.New(nt, buf[2]%2 == 0)
 
 	return Hasher{
 		Song: &s,

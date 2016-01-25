@@ -52,8 +52,13 @@ type Note struct {
 // AddHalfSteps adds a number of half steps and returns a new note
 func (n Note) AddHalfSteps(hs int) Note {
 	t := n.Note + hs
-	n.Note = t % 12
-	n.Octave = n.Octave + t/12
+	if t >= 0 {
+		n.Note = t % 12
+		n.Octave = n.Octave + t/12
+	} else {
+		n.Note = B + t + 1
+		n.Octave = n.Octave - 1
+	}
 	return n
 }
 

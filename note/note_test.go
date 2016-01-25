@@ -12,6 +12,9 @@ func TestAddHalfStep(t *testing.T) {
 		expected := Note{Note: C, Octave: 5}
 
 		convey.So(n.AddHalfSteps(3), convey.ShouldResemble, expected)
+
+		expected = Note{Note: G, Octave: 4}
+		convey.So(Note{Note: C, Octave: 5}.AddHalfSteps(-5), convey.ShouldResemble, expected)
 	})
 }
 

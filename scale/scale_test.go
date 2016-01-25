@@ -10,7 +10,7 @@ import (
 func TestPatternNew(t *testing.T) {
 	Convey("Given pattern", t, func() {
 		Convey("Major", func() {
-			actual := Major.New(note.Note{Note: note.C, Octave: 4})
+			actual := Major.New(note.Note{Note: note.C, Octave: 4}, false)
 			expected := Scale{
 				Notes: []note.Note{
 					note.Note{Note: note.C, Octave: 4},
@@ -31,7 +31,7 @@ func TestPatternNew(t *testing.T) {
 
 func TestString(t *testing.T) {
 	Convey("Given value", t, func() {
-		actual := Major.New(note.Note{Note: note.C, Octave: 4}).String()
+		actual := Major.New(note.Note{Note: note.C, Octave: 4}, false).String()
 		expected := "C4-D4-E4-F4-G4-A4-B4-C5"
 		So(actual, ShouldEqual, expected)
 	})
