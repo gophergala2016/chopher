@@ -10,3 +10,5 @@ Chopher automatically determines whether a note can be part of a chord that fits
 To generate the sound the [Karsplus-Strong algorithm](https://en.wikipedia.org/wiki/Karplus%E2%80%93Strong_string_synthesis) is used, but I think the implementation can be much faster. Due to the speed of the implementation the songs are limited to 200 notes.
 
 If uploading files to random servers is not your thing, you can checkout `main.wav` in this folder which is the sound produced by uploading ``main.go``.
+
+Development of chopher will continue in my repo: [Aorioli/chopher](https://github.com/Aorioli/chopher)
